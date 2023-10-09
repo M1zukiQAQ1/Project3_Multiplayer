@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 006fa6b1b75755d4b91e16f39e189d61, type: 3}
+  m_Name: Glock
+  m_EditorClassIdentifier: 
+  displayName: Glock-17
+  itemDescription: A well-known pistol
+  id: 2
+  numberOfItems: 1
+  itemSprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  weaponPrefab: {fileID: 6090332516583218352, guid: 1e165131650a3dc42ad397439a16b074, type: 3}
