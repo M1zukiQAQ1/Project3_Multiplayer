@@ -21,7 +21,7 @@ public class ClientUIController : NetworkBehaviour
     [SerializeField] private GameObject slotsContainer;
     [SerializeField] private SlotController slotObject;
 
-    [Header("UI: Backpack System: Item Description Panel")]
+    [Header("UI: Backpack System -> Item Description Panel")]
     [SerializeField] private RectTransform itemDescriptionPanel;
     [SerializeField] private Image itemSpriteImage;
     [SerializeField] private TMP_Text itemName;
@@ -30,6 +30,9 @@ public class ClientUIController : NetworkBehaviour
 
     [Header("UI: Health Bar")]
     [SerializeField] private Slider healthBar;
+
+    [Header("UI: Weapon")]
+    [SerializeField] private TMP_Text bulletsIndicationText;
 
     // If UI elements increased, change this boolean expression
     public bool IsUsingUIElements() => backpackPanel.gameObject.activeSelf;
@@ -57,6 +60,11 @@ public class ClientUIController : NetworkBehaviour
         enemyRef.TryGet(out var enemyObject);
 
         StartCoroutine(IEUpdateHintTextPosition(damageNumberObj.transform, enemyObject.transform));
+    }
+
+    public void UpdateBulletNumberText(int currentBullets, int totalBullets)
+    {
+        bulletsIndicationText.text = $"{currentBullets} / {totalBullets}";
     }
 
     public void OpenBackpackPanel()

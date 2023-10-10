@@ -6,6 +6,7 @@ using Unity.Netcode.Components;
 
 public class DoorInteractable : Interactable
 {
+    [Header("New Attributes")]
     [SerializeField] private NetworkAnimator doorAnimator;
 
     //Requiring server to trigger door's animation

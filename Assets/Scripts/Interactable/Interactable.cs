@@ -6,12 +6,22 @@ using Unity.Netcode;
 public abstract class Interactable : NetworkBehaviour, IHintDisplayable
 {
     public string interactableName;
-    public bool isRequireItemToInteract = false;
 
+    [Header("Interactable Modifier: Require Item")]
+    public bool isRequireItemToInteract = false;
+    public Item requiredItem;
+
+    [Header("Interactable Modifier: Require Attribute")]
+    public bool isRequirePlayersAttributesToInteract = false;
+    public PlayerController.AttributesOfPlayer.AttributeType attributeType;
+    public float requiredValue;
+
+    [Header("Interactable Modifier: Require Hold")]
     public bool isRequireHoldToInteract = false;
+
     private NetworkVariable<bool> isInteracting = new(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
-    public Item requiredItem;
+
 
     public bool GetIsInteracting() => isInteracting.Value;
 
@@ -36,5 +46,13 @@ public abstract class Interactable : NetworkBehaviour, IHintDisplayable
         Debug.Log("Object stop being interacted");
     }
 
-    protected bool CheckIfRequirementFullfilled(PlayerController playerInteracted) => !isRequireItemToInteract || playerInteracted.backpack.IsContain(requiredItem);
+    protected bool CheckIfRequirementFullfilled(PlayerController playerInteracted)
+    {
+        //Bug! Fix it!!
+        var fullfilledItemRequirement = !isRequireItemToInteract || playerInteracted.backpack.IsContain(requiredItem);
+        Debug.Log($"Interactable: fullfilled item requirement {fullfilledItemRequirement}");
+        var fullfilledAttributeRequirement = !isRequirePlayersAttributesToInteract || playerInteracted.attributes.CapableOf(attributeType, requiredValue);
+        Debug.Log($"Interactable: fullfilled attributes requirement {fullfilledAttributeRequirement}");
+        return fullfilledAttributeRequirement && fullfilledItemRequirement;
+    }
 }

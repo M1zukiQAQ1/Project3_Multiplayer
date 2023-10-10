@@ -7,9 +7,10 @@ public class GenericWeaponController : WeaponController
 {
     public override void Fire()
     {
-        if (timer >= (60 / firePerMinute))
+        if (timer >= (60 / firePerMinute) && currentNumberOfBullets > 0)
         {
             SpawnBulletServerRpc(owner.GetComponent<IWeaponHoldable>().GetFacingDirection());
+            currentNumberOfBullets--;
             timer = 0;
         }
     }

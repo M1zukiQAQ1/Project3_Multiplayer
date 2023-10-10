@@ -398,8 +398,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactableName: Door
   isRequireItemToInteract: 0
-  isRequireHoldToInteract: 1
   requiredItem: {fileID: 11400000, guid: 1a754c6778f69f647980479f34861a32, type: 2}
+  isRequirePlayersAttributesToInteract: 0
+  attributeType: 0
+  requiredValue: 0
+  isRequireHoldToInteract: 1
   doorAnimator: {fileID: 482729535}
 --- !u!208 &145749173
 NavMeshObstacle:
@@ -3090,6 +3093,7 @@ MonoBehaviour:
   itemDescriptionText: {fileID: 1886691029}
   selectBtn: {fileID: 1185266835}
   healthBar: {fileID: 190564007}
+  bulletsIndicationText: {fileID: 0}
 --- !u!114 &1150973886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5271,7 +5275,6 @@ MonoBehaviour:
   firePerMinute: 720
   bulletPerMagazine: 10
   currentNumberOfBullets: 10
-  totalMagazine: 5
 --- !u!65 &4411859427606927220
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5533,7 +5536,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6024082930626689232}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Script: {fileID: 11500000, guid: ae5eccc2e98bc794f8ae9ec63b14fe42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SyncPositionX: 1

@@ -7,11 +7,10 @@ using UnityEngine.AI;
 public class EnemyChaseState : BaseState<EnemyController>
 {
 
-    
     public EnemyChaseState(StateMachine<EnemyController> stateMachine, EnemyController owner) : base(stateMachine, owner)
     {
     }
-
+    
     public override void EnterState()
     {
         //Update the destination when enemy entered chase state

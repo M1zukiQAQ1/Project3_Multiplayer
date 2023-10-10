@@ -12,6 +12,7 @@ public class EnemyController : NetworkBehaviour, IDamagable, IWeaponHoldable
     public EnemyIdleState IdleState { get; private set; }
     public EnemyChaseState ChaseState { get; private set; }
     public EnemyFightState FightState { get; private set; }
+
     public event Action OnEnemyDeath;
 
     [Header("Patrolling")]

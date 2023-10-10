@@ -6,13 +6,13 @@ using Unity.Netcode;
 
 public class PlayerController : NetworkBehaviour, IDamagable, IWeaponHoldable
 {
-    [SerializeField]
-    private class AttributesOfPlayer
+    [Serializable]
+    public class AttributesOfPlayer
     {
         const int numbersOfTypes = 2;
 
         [SerializeField]
-        private float[] attributes = new float[numbersOfTypes];
+        private NetworkVariable<float[]> attributes = new(new float[numbersOfTypes], NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public enum AttributeType
         {
             STRENGTH, INTELLIGENCE
@@ -20,15 +20,21 @@ public class PlayerController : NetworkBehaviour, IDamagable, IWeaponHoldable
 
         public AttributesOfPlayer(float strength, float intelligence)
         {
-            attributes[(int)AttributeType.STRENGTH] = strength;
-            attributes[(int)AttributeType.INTELLIGENCE] = intelligence;
+            attributes.Value[(int)AttributeType.STRENGTH] = strength;
+            attributes.Value[(int)AttributeType.INTELLIGENCE] = intelligence;
+        }
+
+        public void IncrementValueOfAttribute(AttributeType type, float delta)
+        {
+            attributes.Value[(int)type] += delta;
         }
 
         public bool CapableOf(AttributeType type, float decreasedValue)
         {
-            if (attributes[(int)type] >= decreasedValue)
+            Debug.Log($"Attributes: Check if fullfilled requirement");  
+            if (attributes.Value[(int)type] >= decreasedValue)
             {
-                attributes[(int)type] -= decreasedValue;
+                attributes.Value[(int)type] -= decreasedValue;
                 return true;
             }
             return false;
@@ -62,7 +68,8 @@ public class PlayerController : NetworkBehaviour, IDamagable, IWeaponHoldable
     public float moveSpeed;
     public float groundDrag;
 
-    private AttributesOfPlayer attributes = new(0, 0);
+    [SerializeField]
+    public AttributesOfPlayer attributes;
 
     private float horizontalInput;
     private float verticalInput;
@@ -134,6 +141,12 @@ public class PlayerController : NetworkBehaviour, IDamagable, IWeaponHoldable
         }
 
         SpawnNestedChildren();
+        InitializeAttributes();
+    }
+
+    private void InitializeAttributes()
+    {
+        attributes = new(100, 100);
     }
 
     private IEnumerator IEFindOrientationRef()
@@ -223,6 +236,11 @@ public class PlayerController : NetworkBehaviour, IDamagable, IWeaponHoldable
             if (Input.GetKeyDown(KeyCode.E))
             {
                 ClientUIController.instance.OpenBackpackPanel();
+            }
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                CurrentWeapon.Reload();
             }
 
             if (Input.GetMouseButton(0) && CurrentWeapon != null)
