@@ -399,7 +399,7 @@ MonoBehaviour:
   interactableName: Door
   isRequireItemToInteract: 0
   requiredItem: {fileID: 11400000, guid: 1a754c6778f69f647980479f34861a32, type: 2}
-  isRequirePlayersAttributesToInteract: 0
+  isRequirePlayersAttributesToInteract: 1
   attributeType: 0
   requiredValue: 0
   isRequireHoldToInteract: 1

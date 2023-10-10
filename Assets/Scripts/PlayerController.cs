@@ -29,12 +29,11 @@ public class PlayerController : NetworkBehaviour, IDamagable, IWeaponHoldable
             attributes.Value[(int)type] += delta;
         }
 
-        public bool CapableOf(AttributeType type, float decreasedValue)
+        public bool CapableOf(AttributeType type, float requiredValue)
         {
-            Debug.Log($"Attributes: Check if fullfilled requirement");  
-            if (attributes.Value[(int)type] >= decreasedValue)
+            if (attributes.Value[(int)type] >= requiredValue)
             {
-                attributes.Value[(int)type] -= decreasedValue;
+                attributes.Value[(int)type] -= requiredValue;
                 return true;
             }
             return false;

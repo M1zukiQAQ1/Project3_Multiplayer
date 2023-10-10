@@ -21,8 +21,6 @@ public abstract class Interactable : NetworkBehaviour, IHintDisplayable
 
     private NetworkVariable<bool> isInteracting = new(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
-
-
     public bool GetIsInteracting() => isInteracting.Value;
 
     public virtual string GetHintText() => "Press F to Interact";
@@ -48,8 +46,7 @@ public abstract class Interactable : NetworkBehaviour, IHintDisplayable
 
     protected bool CheckIfRequirementFullfilled(PlayerController playerInteracted)
     {
-        //Bug! Fix it!!
-        var fullfilledItemRequirement = !isRequireItemToInteract || playerInteracted.backpack.IsContain(requiredItem);
+        var fullfilledItemRequirement = !isRequireItemToInteract || playerInteracted.backpack.IsContain(requiredItem.id);
         Debug.Log($"Interactable: fullfilled item requirement {fullfilledItemRequirement}");
         var fullfilledAttributeRequirement = !isRequirePlayersAttributesToInteract || playerInteracted.attributes.CapableOf(attributeType, requiredValue);
         Debug.Log($"Interactable: fullfilled attributes requirement {fullfilledAttributeRequirement}");

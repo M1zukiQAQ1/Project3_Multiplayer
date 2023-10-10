@@ -39,7 +39,7 @@ public abstract class WeaponController : NetworkBehaviour
         onWeaponFired?.Invoke(currentNumberOfBullets, bulletPerMagazine);
     }
 
-    //Fire the weapon
+    // Fire the weapon
     protected virtual void FireInternal(int arg1, int arg2) 
     {
         Debug.Log("Fire!");
