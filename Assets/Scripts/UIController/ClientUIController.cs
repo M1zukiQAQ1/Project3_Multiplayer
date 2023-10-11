@@ -28,6 +28,11 @@ public class ClientUIController : NetworkBehaviour
     [SerializeField] private TMP_Text itemDescriptionText;
     [SerializeField] private Button selectBtn;
 
+    [Header("UI: Backpack System -> Recipe Panel")]
+    [SerializeField] private RectTransform recipePanel;
+    [SerializeField] private RectTransform recipeScrollViewContentGrid;
+    [SerializeField] private Button recipeButtonPrefab;
+
     [Header("UI: Health Bar")]
     [SerializeField] private Slider healthBar;
 
@@ -64,12 +69,46 @@ public class ClientUIController : NetworkBehaviour
 
     public void UpdateBulletNumberText(int currentBullets, int totalBullets)
     {
+        Debug.Log($"UI: UpdateBulletNumberText function called");
         bulletsIndicationText.text = $"{currentBullets} / {totalBullets}";
+    }
+
+    public void UpdateBulletNumberText(string text)
+    {
+        bulletsIndicationText.text = text;
     }
 
     public void OpenBackpackPanel()
     {
         backpackPanel.gameObject.SetActive(true);
+        RefreshBackpackPanel();
+    }
+
+    public void OpenRecipePanel()
+    {
+        recipePanel.gameObject.SetActive(true);
+        RefreshRecipePanel();
+    }
+    
+    private void RefreshRecipePanel()
+    {
+        Debug.Log($"UI: Refreshing recipe panel");
+        foreach (Button btn in recipeScrollViewContentGrid.GetComponentsInChildren<Button>())
+            Destroy(btn.gameObject);
+        foreach (Item recipe in GameManager.instance.GetPlayerOwnedByClient().backpack.GetAllItems ())
+        {
+            if(recipe is Recipe)
+            {
+                CreateRecipeButton(recipe as Recipe);
+            }
+        }
+    }
+
+    private void CreateRecipeButton(Recipe recipe)
+    {
+        var newButton = Instantiate(recipeButtonPrefab, recipeScrollViewContentGrid);
+        newButton.GetComponentInChildren<TMP_Text>().text = recipe.displayName;
+        newButton.onClick.AddListener(() => RecipeDescriptionController.instance.RefreshRecipeDescriptionPanel(recipe));
     }
 
     public void DisplayHintText(string hintStr, Transform objectToTrack) 
@@ -105,19 +144,19 @@ public class ClientUIController : NetworkBehaviour
 
     public void DisplayItemDescriptionMenu(Item itemToDisplay)
     {
-        itemDescriptionPanel.gameObject.SetActive(true);
-        itemSpriteImage.sprite = itemToDisplay.itemSprite;
-        itemName.text = itemToDisplay.displayName;
-        itemDescriptionText.text = itemToDisplay.itemDescription;
-
-
-        // Consider inheriting WeaponItem to UsableItem class, or make it implementing an interface to simplify this if
-        if(itemToDisplay is WeaponItem)
+        // Consider inheriting WeaponItem to UsableItem class, or make it implementing an interface to simplify this if -> Fk you
+        if (itemToDisplay is WeaponItem)
         {
             selectBtn.gameObject.SetActive(true);
             Debug.Log("UIController: " + "IWeaponHolder " + NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<IWeaponHoldable>());
             selectBtn.onClick.AddListener(() => (itemToDisplay as WeaponItem).InstantiateWeaponWithOwnership(NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<IWeaponHoldable>()));
         }
+
+        itemDescriptionPanel.gameObject.SetActive(true);
+        itemSpriteImage.sprite = itemToDisplay.itemSprite;
+        itemName.text = itemToDisplay.displayName;
+        itemDescriptionText.text = itemToDisplay.itemDescription;
+
     }
 
     public void UpdateHealthBarValue(float newHealth)
@@ -135,6 +174,8 @@ public class ClientUIController : NetworkBehaviour
 
     public void CreateSlot(BackpackItem backpackItem)
     {
+        if (backpackItem.item is Recipe)
+            return;
         SlotController newSlot = Instantiate(slotObject, slotsContainer.transform);
         newSlot.slotItem = backpackItem.item;
         newSlot.slotImage.sprite = backpackItem.item.itemSprite;

@@ -267,10 +267,10 @@ MonoBehaviour:
   bulletSpeed: 50
   damage: 5
   maximumDistance: 1000
-  firePerMinute: 720
+  firePerMinute: 90
   bulletPerMagazine: 10
+  reloadingTime: 5
   currentNumberOfBullets: 10
-  totalMagazine: 5
 --- !u!114 &-6711991313269605098
 MonoBehaviour:
   m_ObjectHideFlags: 0

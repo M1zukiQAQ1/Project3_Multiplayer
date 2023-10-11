@@ -8,17 +8,17 @@ public class EnemyFightState : BaseState<EnemyController>
     {
     }
 
+    public override void EnterState()
+    {
+        owner.NavAgent.enabled = false;
+    }
+
     public override void UpdateBehavior()
     {
-        /*
-        if((owner.targetPlayer.position - owner.transform.position).magnitude > owner.fireDistanceRadius)
+        if (!owner.CurrentWeapon.Fire())
         {
-            stateMachine.ChangeState(owner.ChaseState);
-            return;
-        }
-        */
-        owner.CurrentWeapon.Fire();
-        owner.NavAgent.enabled = false;
+            owner.CurrentWeapon.Reload();
+        }   
 
         if((owner.transform.position - owner.targetPlayer.position).magnitude > owner.fireDistanceRadius)
         {

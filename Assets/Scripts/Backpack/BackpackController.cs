@@ -3,62 +3,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class BackpackItem
 {
     public Item item;
     public int numberOfItems;
 
-    public BackpackItem(Item item)
+    public BackpackItem(Item item, int numberOfItems)
     {
         this.item = item;
-        numberOfItems = item.numberOfItems;
+        this.numberOfItems = numberOfItems;
     }
 
-    public void IncrementNumberOfItems(int numberToIncrement)
+
+    public void IncrementNumberOfItems(int delta)
     {
-        numberOfItems += numberToIncrement;
+        numberOfItems += delta;
     }
 }
 
 
 // ToDo: Add UI to recipe
 // ToDo: Implement hint of consuming attribute, Add UI to attributes
-public class Recipe : ScriptableObject
-{
-    private List<BackpackItem> ingredients;
-    private string recipeName;
-    private string description;
-
-    public Recipe(List<BackpackItem> ingredients, string recipeName, string description = "default description")
-    {
-        this.ingredients = ingredients;
-        this.recipeName = recipeName;
-        this.description = description;
-    }
-
-    public bool CapableOfProducing(BackpackController backpack)
-    {
-        if (ingredients == null || ingredients.Count == 0)
-        {
-            Debug.Log("Recipe can't be null");
-            return false;
-        }
-
-        foreach (BackpackItem ingredient in ingredients)
-        {
-            if (!backpack.IsContain(ingredient.item.id, ingredient.numberOfItems))
-                return false;
-        }
-
-        return true;
-    }
-}
 
 public class BackpackController : MonoBehaviour
 {
     [SerializeField] private Dictionary<uint, BackpackItem> items = new();
 
-    public void ReceiveItem(Item itemReceived)
+    public void ReceiveItem(Item itemReceived, int numberOfItems)
     {
         if (itemReceived.id == 0)
         {
@@ -67,12 +39,24 @@ public class BackpackController : MonoBehaviour
         }
         else if (IsContain(itemReceived.id))
         {
-            items[itemReceived.id].IncrementNumberOfItems(itemReceived.numberOfItems);
+            items[itemReceived.id].IncrementNumberOfItems(numberOfItems);
             Debug.Log("Backpack: " + "the number of " + itemReceived.name + " was incremented to " + items[itemReceived.id].numberOfItems);
             return;
         }
 
-        items.Add(itemReceived.id, new BackpackItem(itemReceived));
+        Debug.Log($"Backpack: Add new item {itemReceived.id}");
+        items.Add(itemReceived.id, new BackpackItem(itemReceived, numberOfItems));
+    }
+
+    public void ChangeNumberOfItem(uint id, int delta)
+    {
+        items.TryGetValue(id, out var itemToChange);
+        if(itemToChange == null)
+        {
+            Debug.LogError($"BackpackController: item {id} doesnt exist in this backpack");
+            return;
+        }
+        items[id].numberOfItems += delta;
     }
 
     public List<BackpackItem> GetAllBackpackItems()

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6567143606791748194}
   - component: {fileID: 5522105576527426406}
   m_Layer: 0
-  m_Name: WeaponDropable
+  m_Name: Dropable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2971888058477169270
 MeshFilter:
@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemContained: {fileID: 0}
+  numberOfItems: 1
 --- !u!114 &5522105576527426406
 MonoBehaviour:
   m_ObjectHideFlags: 0

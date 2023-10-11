@@ -11,7 +11,6 @@ public class Item : ScriptableObject
     public uint id;
 
     // To change number of items in the backpack, directly change it in the backpack. Do NOT change this.
-    public readonly int numberOfItems = 1;
     public Sprite itemSprite;
 }
 

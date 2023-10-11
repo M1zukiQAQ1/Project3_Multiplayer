@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b326388e666f034a83f94b0fd3cd61d, type: 3}
+  m_Name: Recipe-Med
+  m_EditorClassIdentifier: 
+  displayName: Recipe-Med
+  itemDescription: Recipe to make basic medications
+  id: 3
+  itemSprite: {fileID: 0}
+  ingredients:
+  - item: {fileID: 11400000, guid: 6627226f22a5e5548b0c8fefef220f93, type: 2}
+    numberOfItems: 1
+  - item: {fileID: 11400000, guid: 2e40da7fdba29d543ba2eea2516e093a, type: 2}
+    numberOfItems: 2
+  targetItem: {fileID: 11400000, guid: 1a754c6778f69f647980479f34861a32, type: 2}
+  numberOfItemToProduce: 3

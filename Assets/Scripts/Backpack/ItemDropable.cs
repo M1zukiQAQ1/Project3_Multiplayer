@@ -7,8 +7,9 @@ using Unity.Netcode;
 public class ItemDropable : NetworkBehaviour, IHintDisplayable
 {
     public Item itemContained = null;
+    public int numberOfItems = 1;
 
-    public string GetHintText() => itemContained.displayName;
+    public string GetHintText() => $"{itemContained.displayName}: {numberOfItems}";
 
     public void DisplayHintText()
     {
@@ -20,7 +21,7 @@ public class ItemDropable : NetworkBehaviour, IHintDisplayable
         if (other.CompareTag("Player"))
         {
  //           GetComponent<NetworkObject>().ChangeOwnership(NetworkManager.Singleton.LocalClientId);
-            other.GetComponentInParent<BackpackController>().ReceiveItem(itemContained);
+            other.GetComponentInParent<BackpackController>().ReceiveItem(itemContained, numberOfItems);
             ClientUIController.instance.RefreshBackpackPanel();
             GameManager.instance.DestroyNetworkObjectServerRpc(GetComponent<NetworkObject>());
         }

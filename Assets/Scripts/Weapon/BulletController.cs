@@ -54,6 +54,10 @@ public class BulletController : NetworkBehaviour
             GameManager.instance.ReceiveDamageServerRpc(damage, targetRef);
         }
         Debug.Log("Bullet: Target is not a NetworkObject, returning");
-        GameManager.instance.DestroyNetworkObjectServerRpc(this.GetComponent<NetworkObject>());
+        if(GetComponent<NetworkObject>() == null || !GetComponent<NetworkObject>().IsSpawned)
+        {
+            Destroy(this);
+        }
+        GameManager.instance.DestroyNetworkObjectServerRpc(GetComponent<NetworkObject>());
     }
 }

@@ -5,14 +5,10 @@ using Unity.Netcode;
 
 public class GenericWeaponController : WeaponController
 {
-    public override void Fire()
+    protected override void FireInternal(int arg1, int arg2)
     {
-        if (timer >= (60 / firePerMinute) && currentNumberOfBullets > 0)
-        {
-            SpawnBulletServerRpc(owner.GetComponent<IWeaponHoldable>().GetFacingDirection());
-            currentNumberOfBullets--;
-            timer = 0;
-        }
+        SpawnBulletServerRpc(owner.GetComponent<IWeaponHoldable>().GetFacingDirection());
+        timer = 0;
     }
 
     [ServerRpc(RequireOwnership = false)]
