@@ -39,6 +39,9 @@ public class ClientUIController : NetworkBehaviour
     [Header("UI: Weapon")]
     [SerializeField] private TMP_Text bulletsIndicationText;
 
+    [Header("UI: Indication Text")]
+    public IndicationText indicationTextManager;
+
     // If UI elements increased, change this boolean expression
     public bool IsUsingUIElements() => backpackPanel.gameObject.activeSelf;
 

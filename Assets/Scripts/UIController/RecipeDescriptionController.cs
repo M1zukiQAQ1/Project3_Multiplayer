@@ -14,6 +14,7 @@ public class RecipeDescriptionController : MonoBehaviour
     [SerializeField] private RectTransform recipeIngredientsGrid;
     [SerializeField] private RectTransform recipeIngredientStackPrefab;
     [SerializeField] private HoldButton recipeProduceButton;
+    [SerializeField] private Slider recipeHoldIndicator;
 
     private void Start()
     {
@@ -22,10 +23,37 @@ public class RecipeDescriptionController : MonoBehaviour
             Destroy(gameObject);
         }
         instance = this;
+
+        DisableUIElements();
+    }
+
+    private void OnDisable()
+    {
+        DisableUIElements();
+    }
+
+    private void DisableUIElements()
+    {
+        recipeItemText.gameObject.SetActive(false);
+        recipeIngredientsGrid.gameObject.SetActive(false);
+        recipeItemImage.gameObject.SetActive(false);
+        recipeProduceButton.gameObject.SetActive(false);
+        recipeHoldIndicator.gameObject.SetActive(false);
+    }
+
+    private void EnableUIElements()
+    {
+        recipeItemText.gameObject.SetActive(true);
+        recipeIngredientsGrid.gameObject.SetActive(true);
+        recipeItemImage.gameObject.SetActive(true);
+        recipeProduceButton.gameObject.SetActive(true);
+        recipeHoldIndicator.gameObject.SetActive(true);
     }
 
     public void RefreshRecipeDescriptionPanel(Recipe recipe)
     {
+        EnableUIElements();
+
         recipeItemText.text = recipe.displayName;
         recipeItemImage.sprite = recipe.itemSprite;
 

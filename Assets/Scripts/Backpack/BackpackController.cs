@@ -32,6 +32,9 @@ public class BackpackController : MonoBehaviour
 
     public void ReceiveItem(Item itemReceived, int numberOfItems)
     {
+        // Use event
+        ClientUIController.instance.indicationTextManager.DisplayHintTextOnUI($"Added {numberOfItems} {itemReceived.displayName}");
+
         if (itemReceived.id == 0)
         {
             Debug.LogError("Backpack: " + "Item's id cannot be zero");
@@ -50,6 +53,7 @@ public class BackpackController : MonoBehaviour
 
     public void ChangeNumberOfItem(uint id, int delta)
     {
+        // Use event
         items.TryGetValue(id, out var itemToChange);
         if(itemToChange == null)
         {
