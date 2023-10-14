@@ -24,8 +24,10 @@ public class PlayerController : NetworkBehaviour, IDamagable, IWeaponHoldable
             attributes.Value[(int)AttributeType.INTELLIGENCE] = intelligence;
         }
 
-        public void IncrementValueOfAttribute(AttributeType type, float delta)
+        public void ChangeValueOfAttribute(AttributeType type, float delta)
         {
+            var label = delta > 0 ? "Increased" : "decreased";
+            ClientUIController.instance.indicationTextManager.DisplayHintTextOnUI($"{delta} {type.ToString().ToLowerInvariant()} {label}");
             attributes.Value[(int)type] += delta;
         }
 
@@ -33,9 +35,10 @@ public class PlayerController : NetworkBehaviour, IDamagable, IWeaponHoldable
         {
             if (attributes.Value[(int)type] >= requiredValue)
             {
-                attributes.Value[(int)type] -= requiredValue;
+                ChangeValueOfAttribute(type, requiredValue);
                 return true;
             }
+            ClientUIController.instance.indicationTextManager.DisplayHintTextOnUI($"Attribute {type.ToString().ToLowerInvariant()} doesn't meet the requirement");
             return false;
         }
     }

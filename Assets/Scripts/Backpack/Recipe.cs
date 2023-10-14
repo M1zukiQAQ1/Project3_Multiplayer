@@ -33,8 +33,9 @@ public class Recipe : Item
 
         foreach (BackpackItem ingredient in ingredients)
         {
-            backpack.ChangeNumberOfItem(ingredient.item.id, ingredient.numberOfItems);
+            backpack.UseItem(ingredient.item, ingredient.numberOfItems);
         }
+
         backpack.ReceiveItem(targetItem, numberOfItemToProduce);
         return true;
     }

@@ -31,8 +31,11 @@ public class DoorInteractable : Interactable
     [ServerRpc(RequireOwnership = false)]
     public override void StopInteractServerRpc(ulong clientId)
     {
-        doorAnimator.SetTrigger("Close");
-        doorAnimator.GetComponent<DoorController>().isOpened = false;
+        if (doorAnimator.GetComponent<DoorController>().isOpened)
+        {
+            doorAnimator.SetTrigger("Close");
+            doorAnimator.GetComponent<DoorController>().isOpened = false;
+        }
 
         base.StopInteractServerRpc(clientId);
     }

@@ -23,6 +23,7 @@ public class ClientUIController : NetworkBehaviour
 
     [Header("UI: Backpack System -> Item Description Panel")]
     [SerializeField] private RectTransform itemDescriptionPanel;
+    [SerializeField] private TMP_Text itemUseDescriptionText;
     [SerializeField] private Image itemSpriteImage;
     [SerializeField] private TMP_Text itemName;
     [SerializeField] private TMP_Text itemDescriptionText;
@@ -145,20 +146,24 @@ public class ClientUIController : NetworkBehaviour
         selectBtn.onClick.RemoveAllListeners();
     }
 
-    public void DisplayItemDescriptionMenu(Item itemToDisplay)
+    public void DisplayItemDescriptionMenu(BackpackItem itemToDisplay)
     {
-        // Consider inheriting WeaponItem to UsableItem class, or make it implementing an interface to simplify this if -> Fk you
-        if (itemToDisplay is WeaponItem)
+        if (itemToDisplay.item.isUsable)
         {
+            var targetPlayer = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerController>();
             selectBtn.gameObject.SetActive(true);
-            Debug.Log("UIController: " + "IWeaponHolder " + NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<IWeaponHoldable>());
-            selectBtn.onClick.AddListener(() => (itemToDisplay as WeaponItem).InstantiateWeaponWithOwnership(NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<IWeaponHoldable>()));
+            selectBtn.onClick.AddListener(() =>
+            {
+                itemToDisplay.item.Use(targetPlayer);
+                CloseItemDescriptionPanel();
+                RefreshBackpackPanel();
+            });
         }
 
         itemDescriptionPanel.gameObject.SetActive(true);
-        itemSpriteImage.sprite = itemToDisplay.itemSprite;
-        itemName.text = itemToDisplay.displayName;
-        itemDescriptionText.text = itemToDisplay.itemDescription;
+        itemSpriteImage.sprite = itemToDisplay.item.itemSprite;
+        itemName.text = itemToDisplay.item.displayName;
+        itemDescriptionText.text = itemToDisplay.item.itemDescription;
 
     }
 
@@ -179,11 +184,7 @@ public class ClientUIController : NetworkBehaviour
     {
         if (backpackItem.item is Recipe)
             return;
-        SlotController newSlot = Instantiate(slotObject, slotsContainer.transform);
-        newSlot.slotItem = backpackItem.item;
-        newSlot.slotImage.sprite = backpackItem.item.itemSprite;
-        newSlot.slotName.text = backpackItem.item.name;
-        newSlot.slotItemNumber.text = backpackItem.numberOfItems.ToString();
+        Instantiate(slotObject, slotsContainer.transform).Initialize(backpackItem);
     }
 
     public void CloseHintText()

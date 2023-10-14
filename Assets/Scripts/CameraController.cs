@@ -9,7 +9,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Transform orientation;
     private float xRotation = 0;
     private float yRotation = 0;
-
+    
     void Update()
     {
         if (ClientUIController.instance != null && ClientUIController.instance.IsUsingUIElements()) return;

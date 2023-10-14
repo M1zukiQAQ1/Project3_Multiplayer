@@ -7,7 +7,6 @@ using UnityEngine.EventSystems;
 
 public class HoldButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-
     [SerializeField] private float requiredHoldTime;
     [SerializeField] private Slider indicator;
 

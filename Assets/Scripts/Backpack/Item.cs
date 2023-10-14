@@ -9,8 +9,13 @@ public class Item : ScriptableObject
     public string displayName;
     public string itemDescription;
     public uint id;
+    public bool isUsable = false;
 
-    // To change number of items in the backpack, directly change it in the backpack. Do NOT change this.
+    public virtual void Use(PlayerController targetPlayer) 
+    {
+        targetPlayer.backpack.UseItem(this, 1);
+    }
+
     public Sprite itemSprite;
 }
 

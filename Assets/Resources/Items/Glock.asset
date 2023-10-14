@@ -15,5 +15,6 @@ MonoBehaviour:
   displayName: Glock-17
   itemDescription: =
   id: 2
+  isUsable: 1
   itemSprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   weaponPrefab: {fileID: 6090332516583218352, guid: 1e165131650a3dc42ad397439a16b074, type: 3}

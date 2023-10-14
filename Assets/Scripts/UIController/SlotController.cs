@@ -6,11 +6,19 @@ using TMPro;
 
 public class SlotController : MonoBehaviour
 {
-    public Item slotItem;
+    public BackpackItem slotItem;
     public Image slotImage;
     public TMP_Text slotName;
     public TMP_Text slotItemNumber;
     public Button spriteBtn;
+
+    public void Initialize(BackpackItem backpackItem)
+    {
+        slotItem = backpackItem;
+        slotImage.sprite = backpackItem.item.itemSprite;
+        slotName.text = backpackItem.item.name;
+        slotItemNumber.text = backpackItem.numberOfItems.ToString();
+    }
 
     public void SpriteOnClick()
     {
