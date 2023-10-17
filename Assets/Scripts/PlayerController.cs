@@ -127,7 +127,7 @@ public class PlayerController : NetworkBehaviour, IDamagable, IWeaponHoldable
 
         ClientId = NetworkManager.Singleton.LocalClientId;
         GameManager.instance.SetClientHealthServerRpc(totalHelath, GetComponent<NetworkObject>());
-        cam = FindObjectOfType<Camera>().transform;
+        cam = Camera.main.transform;
 
         //Update Health UI
         ClientUIController.instance.UpdateHealthBarValue(1);
@@ -260,9 +260,10 @@ public class PlayerController : NetworkBehaviour, IDamagable, IWeaponHoldable
 
     private void HandleVisualHint()
     {
-        if (Physics.Raycast(cameraPos.position, orientation.forward, out RaycastHit hitInfo, 5f) && hitInfo.collider.GetComponent<IHintDisplayable>() != null)
+        Debug.DrawRay(cameraPos.position, cam.forward, Color.white);
+        if (Physics.Raycast(cameraPos.position, cam.forward, out RaycastHit hitInfo, 5f))
         {
-            hitInfo.collider.GetComponent<IHintDisplayable>().DisplayHintText();
+            hitInfo.collider.GetComponent<IHintDisplayable>()?.DisplayHintText();
         }
         else if(ClientUIController.instance != null) { 
             ClientUIController.instance.CloseHintText();
@@ -271,13 +272,14 @@ public class PlayerController : NetworkBehaviour, IDamagable, IWeaponHoldable
 
     private void HandleInteract()
     {
-        if (Physics.Raycast(cameraPos.position, orientation.forward, out RaycastHit hitInfo, 5f))
+        if (Physics.Raycast(cameraPos.position, cam.forward, out RaycastHit hitInfo, 5f))
         {    
             if (hitInfo.collider.GetComponent<Interactable>() != null)
             {
                 currentInteractable = hitInfo.collider.GetComponent<Interactable>();
                 if (Input.GetKeyDown(KeyCode.F))
                 {
+                    Debug.Log($"PlayerController: Interacting with {currentInteractable}");
                     currentInteractable.InteractServerRpc(ClientId);
                 }
 

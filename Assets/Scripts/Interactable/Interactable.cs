@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 
+[RequireComponent(typeof(Collider))]
 public abstract class Interactable : NetworkBehaviour, IHintDisplayable
 {
-    public string interactableName;
-
     [Header("Interactable Modifier: Require Item")]
     public bool isRequireItemToInteract = false;
     public Item requiredItem;
