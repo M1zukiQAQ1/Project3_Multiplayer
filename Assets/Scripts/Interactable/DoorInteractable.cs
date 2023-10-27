@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
-using Unity.Netcode.Components;
 
 public class DoorInteractable : Interactable
 {
     [Header("New Attributes")]
-    [SerializeField] private NetworkAnimator doorAnimator;
+    [SerializeField] private DoorController_ControllerByScripts doorController;
 
     //Requiring server to trigger door's animation
 
@@ -18,11 +17,9 @@ public class DoorInteractable : Interactable
     {
         // Get player interacted with the door
         PlayerController playerInteracted = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject.GetComponent<PlayerController>();
-        if (CheckIfRequirementFullfilled(playerInteracted) && !doorAnimator.GetComponent<DoorController>().isOpened)
+        if (CheckIfRequirementFullfilled(playerInteracted))
         {
-            Debug.Log("Opening!");
-            doorAnimator.SetTrigger("Open");
-            doorAnimator.GetComponent<DoorController>().isOpened = true;
+            doorController.OpenDoor();
         }
 
         base.InteractServerRpc(clientId);
@@ -31,12 +28,7 @@ public class DoorInteractable : Interactable
     [ServerRpc(RequireOwnership = false)]
     public override void StopInteractServerRpc(ulong clientId)
     {
-        if (doorAnimator.GetComponent<DoorController>().isOpened)
-        {
-            doorAnimator.SetTrigger("Close");
-            doorAnimator.GetComponent<DoorController>().isOpened = false;
-        }
-
+        doorController.CloseDoor();
         base.StopInteractServerRpc(clientId);
     }
 

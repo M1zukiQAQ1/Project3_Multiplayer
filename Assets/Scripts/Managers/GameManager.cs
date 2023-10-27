@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using Unity.VisualScripting;
 
 public class GameManager : NetworkBehaviour
 {
     public static GameManager instance;
 
     public ulong HostClientId { get; private set; }
+    public int timeTillSelfDestruction = 300; // 5 mintues
     void Start()
     {
         HostClientId = NetworkManager.Singleton.LocalClientId;
@@ -55,6 +57,19 @@ public class GameManager : NetworkBehaviour
         Debug.Log($"IDamagable: {targetRef.TryGet(out var targetObj)}");
         targetObj.GetComponent<IDamagable>().CurrentHealth.Value = targetHealth;
         Debug.Log($"IDamagable: {targetRef.NetworkObjectId}'s health is set to {targetObj.GetComponent<IDamagable>().CurrentHealth.Value}");
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void StartLabSelfDestructServerRpc(){
+        StartCoroutine(IEStartLabSelfDestruct());
+    }
+
+    private IEnumerator IEStartLabSelfDestruct(){
+        yield return new WaitForSeconds(timeTillSelfDestruction);
+        foreach (var player in FindObjectsOfType<PlayerController>())
+        {
+            DestroyNetworkObjectServerRpc(player.gameObject);
+        }
     }
 
     [ServerRpc(RequireOwnership = false)]

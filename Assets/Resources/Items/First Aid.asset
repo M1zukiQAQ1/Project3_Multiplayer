@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: First Aid
   m_EditorClassIdentifier: 
   displayName: First Aid Kit
-  itemDescription: A powerful healing object
+  itemDescription: A powerful healing kit that can heal 30 points of health
   id: 6
   isUsable: 1
-  itemSprite: {fileID: 0}
+  itemSprite: {fileID: 490812701, guid: a2a78f7fff5f4544f8d4b89541681533, type: 3}
   heallingAbility: 30

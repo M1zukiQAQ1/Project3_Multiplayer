@@ -23,7 +23,7 @@ public class IndicationText : MonoBehaviour
             {
                 if(textToDisplay[i] == ' ')
                 {
-                    textsToDisplay.Enqueue(textToDisplay.Substring(0, i));
+                    textsToDisplay.Enqueue(textToDisplay[..i]);
                     textsToDisplay.Enqueue(textToDisplay[(i + 1)..]);
                     return;
                 }

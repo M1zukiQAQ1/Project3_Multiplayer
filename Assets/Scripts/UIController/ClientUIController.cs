@@ -21,6 +21,7 @@ public class ClientUIController : NetworkBehaviour
     [SerializeField] private GameObject slotsContainer;
     [SerializeField] private SlotController slotObject;
 
+    /*
     [Header("UI: Backpack System -> Item Description Panel")]
     [SerializeField] private RectTransform itemDescriptionPanel;
     [SerializeField] private TMP_Text itemUseDescriptionText;
@@ -28,6 +29,7 @@ public class ClientUIController : NetworkBehaviour
     [SerializeField] private TMP_Text itemName;
     [SerializeField] private TMP_Text itemDescriptionText;
     [SerializeField] private Button selectBtn;
+    */
 
     [Header("UI: Backpack System -> Recipe Panel")]
     [SerializeField] private RectTransform recipePanel;
@@ -42,6 +44,7 @@ public class ClientUIController : NetworkBehaviour
 
     [Header("UI: Indication Text")]
     public IndicationText indicationTextManager;
+    private Coroutine hintTextCoroutine;
 
     // If UI elements increased, change this boolean expression
     public bool IsUsingUIElements() => backpackPanel.gameObject.activeSelf;
@@ -117,28 +120,29 @@ public class ClientUIController : NetworkBehaviour
 
     public void DisplayHintText(string hintStr, Transform objectToTrack) 
     {
+        if(hintTextCoroutine != null){
+            StopCoroutine(hintTextCoroutine);
+        }
         hintText.gameObject.SetActive(true);
         hintText.text = hintStr;
-        StartCoroutine(IEUpdateHintTextPosition(hintText.transform, objectToTrack));
+        hintTextCoroutine = StartCoroutine(IEUpdateHintTextPosition(hintText.transform, objectToTrack));
     }
 
     private IEnumerator IEUpdateHintTextPosition(Transform trackingObject, Transform objectToTrack)
     {
-        while (trackingObject.gameObject.activeSelf)
-        {
-            if(objectToTrack == null)
-            {
-                yield break;
+        yield return new WaitUntil(() => {
+            if(objectToTrack == null){
+                trackingObject.gameObject.SetActive(false);
+                return true;
             }
-
             var screenPosition = Camera.main.WorldToScreenPoint(objectToTrack.position);
-            // Debug.Log($"ClientUIController: Updating hint text's position to {screenPosition}");
             trackingObject.position = screenPosition;
-            yield return new WaitForEndOfFrame();
-        }
+            return false;
+        });
         // Debug.Log($"ClientUIController: Text's active state is {hintText.gameObject.activeSelf}, returning");
     }
 
+    /*
     public void CloseItemDescriptionPanel()
     {
         itemDescriptionPanel.gameObject.SetActive(false);
@@ -146,6 +150,7 @@ public class ClientUIController : NetworkBehaviour
         selectBtn.onClick.RemoveAllListeners();
     }
 
+    
     public void DisplayItemDescriptionMenu(BackpackItem itemToDisplay)
     {
         if (itemToDisplay.item.isUsable)
@@ -164,8 +169,8 @@ public class ClientUIController : NetworkBehaviour
         itemSpriteImage.sprite = itemToDisplay.item.itemSprite;
         itemName.text = itemToDisplay.item.displayName;
         itemDescriptionText.text = itemToDisplay.item.itemDescription;
-
     }
+    */
 
     public void UpdateHealthBarValue(float newHealth)
     {
