@@ -16,6 +16,11 @@ public class BackpackItem
         this.numberOfItems = numberOfItems;
     }
 
+    public BackpackItem(Item item){
+        this.item = item;
+        this.numberOfItems = 1;
+    }
+
 
     public void IncrementNumberOfItems(int delta)
     {

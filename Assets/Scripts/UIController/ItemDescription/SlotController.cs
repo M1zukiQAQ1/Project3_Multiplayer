@@ -20,6 +20,6 @@ public class SlotController : MonoBehaviour
         slotImage.sprite = backpackItem.item.itemSprite;
         slotImage.SetNativeSize();
         slotImage.rectTransform.localScale = new(0.08f, 0.08f, 0.08f);
-        slotImage.GetComponent<ItemOnHoverControllerForImage>().Initialize(slotItem);
+        slotImage.GetComponent<ItemOnHoverBase>().Initialize(slotItem);
     }
 }

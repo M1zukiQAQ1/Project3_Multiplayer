@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 4745597677378494870}
   - component: {fileID: 3669047891603464655}
   m_Layer: 5
-  m_Name: Image-ItemDescription
+  m_Name: DialogBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

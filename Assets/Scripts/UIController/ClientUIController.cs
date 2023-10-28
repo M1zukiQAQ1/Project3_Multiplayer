@@ -102,7 +102,7 @@ public class ClientUIController : NetworkBehaviour
         Debug.Log($"UI: Refreshing recipe panel");
         foreach (Button btn in recipeScrollViewContentGrid.GetComponentsInChildren<Button>())
             Destroy(btn.gameObject);
-        foreach (Item recipe in GameManager.instance.GetPlayerOwnedByClient().backpack.GetAllItems ())
+        foreach (Item recipe in GameManager.instance.GetPlayerOwnedByClient().backpack.GetAllItems())
         {
             if(recipe is Recipe)
             {

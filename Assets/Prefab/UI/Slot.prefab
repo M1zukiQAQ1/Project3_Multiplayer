@@ -75,8 +75,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5654145237560216841}
   - component: {fileID: 4609608419756314276}
-  - component: {fileID: 1775255187014770797}
   - component: {fileID: 3442180299232399946}
+  - component: {fileID: 3687730980069145080}
   m_Layer: 5
   m_Name: Image-Icon
   m_TagString: Untagged
@@ -112,20 +112,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5161164815498191888}
   m_CullTransparentMesh: 1
---- !u!114 &1775255187014770797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5161164815498191888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e82551a4311bd054a85f443bcc7b70a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogBoxPrefab: {fileID: 7019133730259981836, guid: 90ac45c20d97b174ba6ee192e19a1d05, type: 3}
-  dialogBoxOffsetValue: {x: 100, y: -50, z: 0}
 --- !u!114 &3442180299232399946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,6 +142,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3687730980069145080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5161164815498191888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c82204ecc1074e429f5ce673d0ab8e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogBoxPrefab: {fileID: 7019133730259981836, guid: 90ac45c20d97b174ba6ee192e19a1d05, type: 3}
+  dialogBoxOffsetValue: {x: 100, y: -50, z: 0}
 --- !u!1 &5295670100195147088
 GameObject:
   m_ObjectHideFlags: 0
