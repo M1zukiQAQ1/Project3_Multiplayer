@@ -51,6 +51,9 @@ public class RecipeDescriptionController : MonoBehaviour
         recipeItemText.text = recipe.displayName;
 
         recipeItemImage.sprite = recipe.itemSprite;
+        recipeItemImage.SetNativeSize();
+        recipeItemImage.transform.localScale = new(0.35f, 0.35f, 0.35f);
+
         recipeItemImage.GetComponent<ItemOnHoverForRecipe>().Initialize(new BackpackItem(recipe));
 
         for(int i = recipeIngredientsGrid.childCount - 1; i >= 0; i--)
@@ -59,7 +62,7 @@ public class RecipeDescriptionController : MonoBehaviour
         foreach (BackpackItem ingredient in recipe.GetIngredients())
         {
             var newRecipeStack = Instantiate(recipeIngredientStackPrefab, recipeIngredientsGrid);
-            Debug.Log($"UI: New recipe stack instantiated: {newRecipeStack}");
+
             newRecipeStack.GetComponentInChildren<TMP_Text>().text = $"{ingredient.numberOfItems} {ingredient.item.displayName}";
             newRecipeStack.GetComponentInChildren<Image>().sprite = ingredient.item.itemSprite;
         }

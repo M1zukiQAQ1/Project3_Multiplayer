@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b326388e666f034a83f94b0fd3cd61d, type: 3}
+  m_Name: First Aid Kit (Recipe)
+  m_EditorClassIdentifier: 
+  displayName: First Aid Kit
+  itemDescription: '-'
+  id: 3265
+  isUsable: 0
+  itemSprite: {fileID: 490812701, guid: a2a78f7fff5f4544f8d4b89541681533, type: 3}
+  ingredients:
+  - item: {fileID: 11400000, guid: 51b71f852650c0145b44d55fbadb17bd, type: 2}
+    numberOfItems: 3
+  - item: {fileID: 11400000, guid: 4329bf40b12de7c4bb2173a5bbce250e, type: 2}
+    numberOfItems: 5
+  targetItem: {fileID: 11400000, guid: 32d8b517a860a6d4d88f1e7df000b85a, type: 2}
+  numberOfItemToProduce: 1

@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class ItemOnHoverForRecipe : ItemOnHoverBase
 {
+    [SerializeField] private float itemHoldTime;
     private Recipe slotRecipe;
 
     public override void Initialize(BackpackItem slotItem)

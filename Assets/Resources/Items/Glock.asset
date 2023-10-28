@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Glock
   m_EditorClassIdentifier: 
   displayName: Glock-17
-  itemDescription: =
+  itemDescription: A pistol that can fire at a slow rate
   id: 2
   isUsable: 1
   itemSprite: {fileID: 1723912368, guid: a2a78f7fff5f4544f8d4b89541681533, type: 3}

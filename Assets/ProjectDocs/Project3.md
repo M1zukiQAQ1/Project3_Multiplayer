@@ -93,8 +93,8 @@ The game take place in the aforementioned undersea lab. Pieces of information ab
     ![uiPic](./Resources/微信图片_20231027232530.png)
     
 - Scripts
-    - The networking of the game is developed using [netcode](https://github.com/Unity-Technologies/com.unity.netcode.gameobjects); the development of scripts is maintained by implementing various interfaces. 
-    - The scripts are original, without using any additional resources or aid from teachers.
+    - The networking of the game is developed using [netcode](https://github.com/Unity-Technologies/com.unity.netcode.gameobjects); the development is maintained by implementing various interfaces. 
+    - The scripts are original, without using any aid from teachers.
     - **The full scripts can be found at [https://github.com/M1zukiQAQ1/Project3_Multiplayer](https://github.com/M1zukiQAQ1/Project3_Multiplayer), including enemies' behavior tree, backpack system, and many more.**
     - **Demo videos demonstrating functions can be found at [https://drive.google.com/drive/folders/1o8o7_TZhfcqN2KUv-lMiRcJozxWxxOB0?usp=sharing](https://drive.google.com/drive/folders/1o8o7_TZhfcqN2KUv-lMiRcJozxWxxOB0?usp=sharing).**
     - Examples of scripts
