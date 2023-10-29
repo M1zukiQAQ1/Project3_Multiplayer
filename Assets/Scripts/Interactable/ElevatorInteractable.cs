@@ -6,7 +6,7 @@ public class ElevatorInteractable : Interactable {
     public Vector3 teleportPosition;
     public override string GetHintText() => $"Press F to teleport to {teleportLocationName}";
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public override void InteractServerRpc(ulong clientId)
     {
         var player = NetworkManager.ConnectedClients[clientId].PlayerObject.GetComponent<PlayerController>();

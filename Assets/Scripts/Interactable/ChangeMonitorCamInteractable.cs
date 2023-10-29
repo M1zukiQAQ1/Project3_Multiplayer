@@ -14,7 +14,7 @@ public class ChangeMonitorCamInteractable : Interactable
 
     public override string GetHintText() => $"Press F to Display {changeType.ToString().ToLowerInvariant()} Camera";
     
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public override void InteractServerRpc(ulong clientId)
     {
         Debug.Log($"MonitorInteractable: target monitor {targetMonitor}");

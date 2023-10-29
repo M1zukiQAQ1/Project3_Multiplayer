@@ -8,8 +8,8 @@ public class IndicationText : MonoBehaviour
 {
     [SerializeField] private float indicationTextHoldTime = 2f;
     [SerializeField] private float indicationTextFadeTime = 0.5f;
-    [SerializeField] private int maximumTextAllowedInOneMessage = 25;
-    [SerializeField] private int maximumTextAllowedOnScreen = 3;
+    [SerializeField] private const int maximumTextAllowedInOneMessage = 25;
+    [SerializeField] private const int maximumTextAllowedOnScreen = 3;
     [SerializeField] private TMP_Text indicationTextPrefab;
 
     private Queue<string> textsToDisplay = new();

@@ -1,4 +1,4 @@
-# Project 3
+# Outbreak 
 An Individual Game Project
 ## Overview
 A multiplayer game featuring "Battle Royal" and "Raid (Destiny 2)" experiences, combinig PvP with PvE.
@@ -72,16 +72,26 @@ The game take place in the aforementioned undersea lab. Pieces of information ab
     The scene and mechanism of the scene to deisgned to encourage collaboration between players.
     - 1F
     After entering the main door, the building will enter lockdown mode, where main door cannot be open inside. The building will also initiate self-destruction sequence which will be completed in 10 minutes.
-    ![1F](./Resources/微信图片_20231026142843.png)
-    ![1F](./Resources/B1_New.png)
+        - Scene Design
+        ![1F](./Resources/B1_New.png)
+        - In game
+        ![1F](./Resources/微信图片_20231026142843.png)
+        ![1F](./Resources/微信图片_20231029102504.png)
     - 2F
     On Floor 2, players will encounter various rooms and enemies. Control room is where one player can open doors for the rest of their team. Player in the control room can also choose the whether power on or power off one of the rooms. Powering off one room will result in disabling of safety mechanism (there'll be no more enemies coming out) and insulating door (door can only be opened using force).
-    ![2F](./Resources/微信图片_20231026142850.png)
-    ![2F](./Resources/B2_New.png)
+        - Scene Design
+        ![2F](./Resources/B2_New.png)
+        - In game
+        ![2F](./Resources/微信图片_20231026142850.png)
+        ![2F](./Resources/微信图片_20231029102452.png)
     - 3F
     On Floor 3, at the end of the corridor, there's an emergency override button to disable the building's lockdown mode. However, after triggering the button, some of the floors (the red square) will collapse, opening a hatch to floor 2.
-    ![3F](./Resources/微信图片_20231026142854.png)
-    ![3F](./Resources/B3.png)
+        - Scene Design
+        ![3F](./Resources/B3.png)
+        - In game
+        ![3F](./Resources/微信图片_20231026142854.png)
+        ![3F](./Resources/微信图片_20231029102501.png)
+
 - UI Design
     - The game's UI design emphasizes futurism to accomdate the settings.
     - Backpack panel design
@@ -90,7 +100,7 @@ The game take place in the aforementioned undersea lab. Pieces of information ab
     ![uiPic](./Resources/微信图片_20231027232445.png)
     ![uiPic](./Resources/微信图片_20231027232447.png)
     ![uiPic](./Resources/微信图片_20231027232452.png)
-    ![uiPic](./Resources/微信图片_20231027232530.png)
+    ![uiPic](./Resources/微信图片_20231027232530.png)  
     
 - Scripts
     - The networking of the game is developed using [netcode](https://github.com/Unity-Technologies/com.unity.netcode.gameobjects); the development is maintained by implementing various interfaces. 

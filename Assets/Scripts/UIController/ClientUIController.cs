@@ -47,7 +47,7 @@ public class ClientUIController : NetworkBehaviour
     private Coroutine hintTextCoroutine;
 
     // If UI elements increased, change this boolean expression
-    public bool IsUsingUIElements() => backpackPanel.gameObject.activeSelf;
+    public bool IsUsingUIElements() => backpackPanel.gameObject.activeSelf || recipePanel.gameObject.activeSelf;
 
     private void Start()
     {

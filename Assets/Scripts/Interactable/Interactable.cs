@@ -22,14 +22,14 @@ public abstract class Interactable : NetworkBehaviour, IHintDisplayable
 
     public bool GetIsInteracting() => isInteracting.Value;
 
-    public virtual string GetHintText() => "Press F to Interact";
+    public abstract string GetHintText();
 
     public void DisplayHintText()
     {
         ClientUIController.instance.DisplayHintText(GetHintText(), transform);
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public virtual void InteractServerRpc(ulong clientId)
     {
         isInteracting.Value = true;
