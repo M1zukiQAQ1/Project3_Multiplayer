@@ -54,6 +54,7 @@ public class EnemyController : NetworkBehaviour, IDamagable, IWeaponHoldable
     [SerializeField] private WeaponController currentWeapon;
     public ulong ClientId { get; set; } = 0;
     public Transform targetPlayer;
+    public float rotateSpeed = 1f;
 
     private uint currentWaypointIndex = 0;
 
@@ -67,6 +68,7 @@ public class EnemyController : NetworkBehaviour, IDamagable, IWeaponHoldable
         enemyStateMachine.Initialize(IdleState);
 
         OnEnemyDeath += Death;
+    // navAgent.stoppingDistance = fireDistanceRadius;
     }
 
     public override void OnNetworkSpawn()

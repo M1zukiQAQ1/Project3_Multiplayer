@@ -81,7 +81,7 @@ public class PlayerController : NetworkBehaviour, IDamagable, IWeaponHoldable
 
     private Interactable currentInteractable;
 
-    public float TotalHealth 
+    public float TotalHealth
     {
         get => totalHelath;
         set
@@ -185,7 +185,7 @@ public class PlayerController : NetworkBehaviour, IDamagable, IWeaponHoldable
         var _weaponPos = Instantiate(weaponPosPrefab).transform;
         _weaponPos.GetComponent<NetworkObject>().SpawnWithOwnership(_clientId);
         _weaponPos.SetParent(_orientationObj);
-        
+
         Debug.Log("Player: Client " + _clientId + " isn't host, calling client rpc");
         SetReferenceForClientRpc(_clientId, _orientationObj.GetComponent<NetworkObject>(), _weaponPos.GetComponent<NetworkObject>());
     }
@@ -199,7 +199,7 @@ public class PlayerController : NetworkBehaviour, IDamagable, IWeaponHoldable
             return;
         }
 
-        if(_orientationObjRef.TryGet(out NetworkObject _orientationObj) && _weaponPosRef.TryGet(out NetworkObject _weaponPosObj))
+        if (_orientationObjRef.TryGet(out NetworkObject _orientationObj) && _weaponPosRef.TryGet(out NetworkObject _weaponPosObj))
         {
             orientation = _orientationObj.GetComponent<Transform>();
             weaponHoldPos = _weaponPosObj.GetComponent<Transform>();
@@ -226,7 +226,7 @@ public class PlayerController : NetworkBehaviour, IDamagable, IWeaponHoldable
         }
         else
         {
-            if(Cursor.visible == true)
+            if (Cursor.visible == true)
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
@@ -265,7 +265,8 @@ public class PlayerController : NetworkBehaviour, IDamagable, IWeaponHoldable
         {
             hitInfo.collider.GetComponent<IHintDisplayable>()?.DisplayHintText();
         }
-        else if(ClientUIController.instance != null) { 
+        else if (ClientUIController.instance != null)
+        {
             ClientUIController.instance.CloseHintText();
         }
     }
@@ -273,7 +274,7 @@ public class PlayerController : NetworkBehaviour, IDamagable, IWeaponHoldable
     private void HandleInteract()
     {
         if (Physics.Raycast(cameraPos.position, cam.forward, out RaycastHit hitInfo, 5f))
-        {    
+        {
             if (hitInfo.collider.GetComponent<Interactable>() != null)
             {
                 currentInteractable = hitInfo.collider.GetComponent<Interactable>();
@@ -290,7 +291,7 @@ public class PlayerController : NetworkBehaviour, IDamagable, IWeaponHoldable
                 }
 
             }
-           
+
         }
 
         else if (currentInteractable != null && currentInteractable.GetIsInteracting())
@@ -305,7 +306,8 @@ public class PlayerController : NetworkBehaviour, IDamagable, IWeaponHoldable
     {
         Vector3 flatVelocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 
-        if(flatVelocity.magnitude > moveSpeed) {
+        if (flatVelocity.magnitude > moveSpeed)
+        {
             Vector3 limitedVelocity = flatVelocity.normalized * moveSpeed;
             rb.velocity = new Vector3(limitedVelocity.x, rb.velocity.y, limitedVelocity.z);
         }
@@ -330,7 +332,7 @@ public class PlayerController : NetworkBehaviour, IDamagable, IWeaponHoldable
         HandleGroundCheck();
         HandleMovement();
         HandleSpeedControl();
-        HandleDrug();      
+        HandleDrug();
     }
 
     private void HandleMovement()

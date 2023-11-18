@@ -29,6 +29,8 @@ public abstract class Interactable : NetworkBehaviour, IHintDisplayable
         ClientUIController.instance.DisplayHintText(GetHintText(), transform);
     }
 
+    // This server rpc doesn't require ownership! 
+    // Add this modifer: [ServerRpc(RequireOwnership = )]
     [ServerRpc(RequireOwnership = false)]
     public virtual void InteractServerRpc(ulong clientId)
     {
