@@ -1,0 +1,4 @@
+repository "Project3_Multplayer@wechat_os_qy0xajfypuyu2zbof4kyssprk@cloud.cn"
+  path "/"
+    br "/main"
+    co "/main"
